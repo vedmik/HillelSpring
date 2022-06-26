@@ -3,6 +3,7 @@ package com.example.hillelspring.controller;
 import com.example.hillelspring.model.Person;
 import com.example.hillelspring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,8 @@ public class PersonController {
         this.personService = personService;
     }
 
-
     @GetMapping(value = "/{id}")
+    @Cacheable(value = "person_id")
     public @ResponseBody Person getPerson(@PathVariable Integer id){
         return  personService.getPerson(id);
     }

@@ -34,8 +34,7 @@ public class AnimalService {
 
     public Integer createAnimal(Animal animal,Integer id) {
         animal.setOwner(id);
-        animalRepository.save(animal);
-        return animal.getId();
+        return animalRepository.save(animal).getId();
     }
 
     public void deleteAnimal(Integer id) {

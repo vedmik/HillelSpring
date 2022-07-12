@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 public class AnimalService {
     private final AnimalRepository animalRepository;
 
+    private final PersonService personService;
+
     @Autowired
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository, PersonService personService) {
         this.animalRepository = animalRepository;
+        this.personService = personService;
     }
 
     public Animal getAnimal(Integer id) {
@@ -32,8 +35,8 @@ public class AnimalService {
         return animal;
     }
 
-    public Integer createAnimal(Animal animal,Integer id) {
-        animal.setOwner(id);
+    public Integer createAnimal(Animal animal, Integer id) {
+        animal.setOwner(personService.getPerson(id));
         return animalRepository.save(animal).getId();
     }
 

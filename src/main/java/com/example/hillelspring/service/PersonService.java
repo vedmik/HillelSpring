@@ -14,14 +14,11 @@ public class PersonService {
     }
 
     public Integer createPerson(Person person){
-        personRepository.save(person);
-        return person.getId();
+        return personRepository.save(person).getId();
     }
 
     public Person getPerson(Integer id){
-        Person person = personRepository.findById(id)
-                .orElse(Person.builder().build());
-        return person;
+        return personRepository.findById(id).orElse(Person.builder().build());
     }
 
     public Person updatePerson(Person restPerson){
